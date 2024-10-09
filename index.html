@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel=”icon” href=”logo.jpg”>
+    <title>Jadwal Kelas</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #0a0f26;
+            margin: 0;
+            padding: 40px;
+            color: white;
+        }
+
+        h1 {
+            text-align: center;
+            color: #00bfff;
+            font-size: 2.5em;
+            margin-bottom: 40px;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            display: flex;
+            flex-direction: row; /* Menyusun navbar dalam baris */
+            justify-content: space-between; /* Mengatur ruang antara judul dan tautan */
+            align-items: center;
+            background-color: #004080;
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin-bottom: 30px; /* Spasi di bawah navbar */
+            flex-wrap: wrap; /* Memungkinkan navbar untuk mengatur ulang pada layar kecil */
+        }
+
+        .navbar h2 {
+            margin: 0;
+            font-size: 1em; /* Ukuran teks lebih kecil */
+            color: white; /* Mengubah warna teks menjadi putih */
+        }
+
+        .navbar a {
+            margin: 0 10px; /* Memberikan jarak antar tautan */
+            font-size: 1em; /* Ukuran teks lebih kecil */
+            color: white; /* Mengubah warna teks menjadi putih */
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .navbar a:hover {
+            background-color: #005bb5; /* Warna latar belakang saat hover */
+        }
+
+        .schedule {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: rgba(0, 0, 139, 0.9);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .toggle-switch {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px; /* Spasi di bawah switch */
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+            margin: 0 10px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .day {
+            background-color: #004080;
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 15px;
+            cursor: pointer;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            transition: background-color 0.3s;
+            position: relative; /* Tambahkan position relative untuk posisi absolute di dalamnya */
+            text-align: center; /* Rata tengah untuk teks hari */
+            font-size: 1.5em; /* Ukuran teks hari */
+        }
+
+        .day:hover {
+            background-color: #005bb5;
+        }
+
+        .subjects {
+            background-color: #1e3a6a;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 10px; /* Jarak antara hari dan mata pelajaran */
+            opacity: 0; /* Awalnya tidak terlihat */
+            transition: opacity 0.5s ease, height 0.5s ease; /* Transisi untuk efek halus */
+            height: 0; /* Awalnya tinggi 0 */
+            overflow: hidden; /* Sembunyikan konten yang melebihi tinggi */
+        }
+
+        .subject {
+            margin: 5px 0; /* Menambah jarak vertikal antar mata pelajaran */
+            text-align: left; /* Rata kiri untuk mata pelajaran */
+            font-size: 1em; /* Ukuran teks mata pelajaran lebih kecil */
+            white-space: nowrap; /* Mencegah teks membungkus ke baris baru */
+            overflow: hidden; /* Sembunyikan teks yang melebihi */
+            text-overflow: ellipsis; /* Tambahkan titik-titik di akhir teks yang terpotong */
+        }
+
+        /* Responsif untuk perangkat mobile */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em; /* Ukuran judul lebih kecil di perangkat mobile */
+            }
+
+            .day {
+                font-size: 1.2em; /* Ukuran teks hari lebih kecil di perangkat mobile */
+            }
+
+            .subject {
+                font-size: 0.9em; /* Ukuran teks mata pelajaran lebih kecil di perangkat mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <h2>Jadwal</h2>
+    <div>
+        <a href="piket.html">Piket</a>
+        <a href="absen.html">No Absen</a>
+    </div>
+</div>
+
+<h1>Jadwal Kelas</h1>
+
+<div class="schedule">
+    <div class="toggle-switch">
+        <span style="margin-right: 10px; font-size: 1.5em;">Mode Teori</span>
+        <label class="switch">
+            <input type="checkbox" id="modeSwitch" onchange="switchMode(this.checked ? 'praktek' : 'teori')">
+            <span class="slider"></span>
+        </label>
+        <span style="margin-left: 10px; font-size: 1.5em;">Mode Praktek</span>
+    </div>
+
+    <div class="day" onclick="toggleSubjects('monday', this)">
+        Senin
+        <div class="subjects" id="monday">
+            <div class="subject" data-teori="PJOK" data-praktek="TKJ">07:30 - 11:00: <span class="subject-name">PJOK</span></div>
+            <div class="subject" data-teori="PKN" data-praktek="TKJ">11:00 - 13:15: <span class="subject-name">PKN</span></div>
+            <div class="subject" data-teori="BK" data-praktek="TKJ">13:15 - 14:00: <span class="subject-name">BK</span></div>
+            <div class="subject" data-teori="B.INDO" data-praktek="TKJ">14:00 - 16:15: <span class="subject-name">B.INDO</span></div>
+        </div>
+    </div>
+
+    <div class="day" onclick="toggleSubjects('tuesday', this)">
+        Selasa
+        <div class="subjects" id="tuesday">
+            <div class="subject" data-teori="BING" data-praktek="TKJ">07:00 - 09:15: <span class="subject-name">Bahasa Indonesia</span></div>
+            <div class="subject" data-teori="MLOK" data-praktek="TKJ">09:30 - 11:00: <span class="subject-name">Matematika</span></div>
+            <div class="subject" data-teori="PAI" data-praktek="TKJ">11:00 - 13:15: <span class="subject-name">Olahraga</span></div>
+            <div class="subject" data-teori="PKN" data-praktek="TKJ">13:15 - 14:45: <span class="subject-name">Olahraga</span></div>
+        </div>
+    </div>
+
+    <div class="day" onclick="toggleSubjects('wednesday', this)">
+        Rabu
+        <div class="subjects" id="wednesday">
+            <div class="subject" data-teori="B.INDO" data-praktek="TKJ">07:00 - 09:15: <span class="subject-name">Fisika</span></div>
+            <div class="subject" data-teori="MTK" data-praktek="TKJ">09:30 - 11:00: <span class="subject-name">Kimia</span></div>
+            <div class="subject" data-teori="PAI" data-praktek="TKJ">11:00 - 13:15: <span class="subject-name">Biologi</span></div>
+            <div class="subject" data-teori="BING" data-praktek="TKJ">13:15 - 15:30: <span class="subject-name">Biologi</span></div>
+        </div>
+    </div>
+
+    <div class="day" onclick="toggleSubjects('thursday', this)">
+        Kamis
+        <div class="subjects" id="thursday">
+            <div class="subject" data-teori="PKW" data-praktek="TKJ">07:00 - 10:15: <span class="subject-name">Sejarah</span></div>
+            <div class="subject" data-teori="MLOK" data-praktek="TKJ">10:15 - 11:45: <span class="subject-name">Geografi</span></div>
+            <div class="subject" data-teori="MTK" data-praktek="PKW">12:30 - 15:30: <span class="subject-name">Ekonomi</span></div>
+        </div>
+    </div>
+
+    <div class="day" onclick="toggleSubjects('friday', this)">
+        Jumat
+        <div class="subjects" id="friday">
+            <div class="subject" data-teori="SNI" data-praktek="PKW">07:30 - 09:45: <span class="subject-name">Seni</span></div>
+            <div class="subject" data-teori="P5" data-praktek="P5">10:00 - 11:30: <span class="subject-name">TIK</span></div>
+            <div class="subject" data-teori="MAPIL" data-praktek="MAPIL">12:45 - 15:45: <span class="subject-name">Pendidikan Agama</span></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let currentMode = 'teori'; // Default mode
+
+    function switchMode(mode) {
+        currentMode = mode;
+        updateSubjects();
+    }
+
+    function toggleSubjects(day, element) {
+        const subjectsElement = document.getElementById(day);
+        subjectsElement.style.opacity = subjectsElement.style.opacity === "1" ? "0" : "1";
+        subjectsElement.style.height = subjectsElement.style.opacity === "1" ? `${subjectsElement.scrollHeight}px` : "0";
+        updateSubjects();
+    }
+
+    function updateSubjects() {
+        const subjectElements = document.querySelectorAll('.subjects');
+        subjectElements.forEach(subjects => {
+            subjects.querySelectorAll('.subject').forEach(subject => {
+                const subjectName = subject.querySelector('.subject-name');
+                subjectName.innerText = subject.dataset[currentMode];
+            });
+        });
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel=”icon” href=”logo.jpg”>
+    <title>Jadwal Piket</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #0a0f26;
+            margin: 0;
+            padding: 40px;
+            color: white;
+        }
+
+        .navbar {
+            display: flex;
+            flex-direction: row; /* Menyusun navbar dalam baris */
+            justify-content: space-between; /* Mengatur ruang antara judul dan tautan */
+            align-items: center;
+            background-color: #004080;
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin-bottom: 30px; /* Spasi di bawah navbar */
+            flex-wrap: wrap; /* Memungkinkan navbar untuk mengatur ulang pada layar kecil */
+        }
+
+        .navbar h2 {
+            margin: 0;
+            font-size: 1em; /* Ukuran teks lebih kecil */
+            color: white; /* Mengubah warna teks menjadi putih */
+        }
+
+        .navbar a {
+            margin: 0 10px; /* Memberikan jarak antar tautan */
+            font-size: 1em; /* Ukuran teks lebih kecil */
+            color: white; /* Mengubah warna teks menjadi putih */
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .navbar a:hover {
+            background-color: #005bb5; /* Warna latar belakang saat hover */
+        }
+
+        h1 {
+            text-align: center;
+            color: #00bfff;
+            font-size: 2.5em;
+            margin-bottom: 40px;
+        }
+
+        .schedule {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: rgba(0, 0, 139, 0.9);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .day {
+            background-color: #004080;
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            text-align: center; /* Rata tengah untuk teks hari */
+        }
+
+        .person {
+            margin: 5px 0; /* Menambah jarak vertikal antar nama */
+            text-align: left; /* Rata kiri untuk nama */
+            font-size: 1.2em; /* Ukuran teks nama */
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <h2>Piket</h2>
+    <div>
+        <a href="index.html">Jadwal</a>
+        <a href="absen.html">No Absen</a>
+    </div>
+</div>
+
+<h1>Halaman Jadwal Piket</h1>
+
+<div class="schedule">
+    <div class="day">
+        Senin
+        <div class="person">1. Zahran</div>
+        <div class="person">2. Casey</div>
+        <div class="person">3. Aldian</div>
+        <div class="person">4. Faqih</div>
+        <div class="person">5. Carissa</div>
+        <div class="person">6. Messi</div>
+        <div class="person">7. Nurlaila</div>
+    </div>
+
+    <div class="day">
+        Selasa
+        <div class="person">1. Aidan</div>
+        <div class="person">2. Fajar</div>
+        <div class="person">3. Andin</div>
+        <div class="person">4. Melati</div>
+        <div class="person">5. Taqi</div>
+        <div class="person">6. Fazle</div>
+        <div class="person">7. Rayhan</div>
+    </div>
+
+    <div class="day">
+        Rabu
+        <div class="person">1. Paskal</div>
+        <div class="person">2. Rahmania</div>
+        <div class="person">3. Daffa</div>
+        <div class="person">4. Nikita</div>
+        <div class="person">5. Putra</div>
+        <div class="person">6. Dandy</div>
+        <div class="person">7. Wisnu</div>
+    </div>
+
+    <div class="day">
+        Kamis
+        <div class="person">1. Dede</div>
+        <div class="person">2. Nayla</div>
+        <div class="person">3. Rayfina</div>
+        <div class="person">4. Ezra</div>
+        <div class="person">5. Malika</div>
+        <div class="person">6. Ravan</div>
+        <div class="person">7. Rafifa</div>
+    </div>
+
+    <div class="day">
+        Jumat
+        <div class="person">1. Wahid</div>
+        <div class="person">2. Ahsan</div>
+        <div class="person">3. Aldo</div>
+        <div class="person">4. Ridho</div>
+        <div class="person">5. Defrans</div>
+        <div class="person">6. Anggara</div>
+        <div class="person">7. Rizki</div>
+        <div class="person">8. Raffa</div>
+    </div>
+</div>
+
+</body>
+</html>
